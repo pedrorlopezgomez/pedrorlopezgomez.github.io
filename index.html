@@ -299,7 +299,7 @@
   -->
   var P=[];
   (function(){
-  var p=6;                                   // parallels per hemisphere
+  var p=9;                                   // parallels per hemisphere
   P.push([0,0,1],[0,0,-1]);                  // poles
   var counts=[];
   for(var j=1;j<=p;j++) counts.push(4*j);    // north: j=1 nearest the pole, 4j points
@@ -330,6 +330,7 @@ var N=P.length, i;
     for(var m=0;m<lons.length;m++)poly(lons[m],ca,sa);
     for(m=0;m<lats.length;m++)poly(lats[m],ca,sa);
     var proj=[]; for(var j=0;j<N;j++){var q=rot(P[j],ca,sa); proj.push([CX+q[0]*R, CY-q[1]*R, q[2]]);}
+    proj=proj.filter(function(p){return p[2] > -0.02;});   // hide far-side points
     proj.sort(function(u,v){return u[2]-v[2];});
     for(j=0;j<proj.length;j++){var d=(proj[j][2]+1)/2; var rad=R*0.013*(0.55+0.9*d*d);
       ctx.beginPath(); ctx.arc(proj[j][0],proj[j][1],rad,0,6.2832);
