@@ -290,8 +290,27 @@
   function size(){var r=c.getBoundingClientRect(); W=r.width; H=r.height; c.width=W*dpr; c.height=H*dpr; ctx.setTransform(dpr,0,0,dpr,0,0); R=Math.min(W,H)*0.42; CX=W/2; CY=H/2;}
   size(); window.addEventListener('resize',size);
 
+  <!-- For Fibonacci:
   var N=320, P=[], i, phi, th, gold=Math.PI*(1+Math.sqrt(5));
   for(i=0;i<N;i++){var y=1-2*(i+0.5)/N, r=Math.sqrt(1-y*y), a=gold*i; P.push([r*Math.cos(a), y, r*Math.sin(a)]);}
+  -->
+  var P=[];
+  (function(){
+  var p=6;                                   // parallels per hemisphere
+  P.push([0,0,1],[0,0,-1]);                  // poles
+  var counts=[];
+  for(var j=1;j<=p;j++) counts.push(4*j);    // north: j=1 nearest the pole, 4j points
+  for(var j=p;j>=1;j--) counts.push(4*j);    // south (mirror)
+  var ringPts=0; counts.forEach(function(n){ringPts+=n;});
+  var total=ringPts+2, cum=1;
+  for(var k=0;k<counts.length;k++){
+    var n=counts[k], center=cum+n/2, z=1-2*center/total,
+        r=Math.sqrt(Math.max(0,1-z*z)), off=(k%2)*(Math.PI/n);
+    for(var m=0;m<n;m++){var a=2*Math.PI*m/n+off; P.push([r*Math.cos(a), z, r*Math.sin(a)]);}
+    cum+=n;
+  }
+})();
+var N=P.length, i;
   var TX=-0.42, cT=Math.cos(TX), sT=Math.sin(TX);
   var lons=[], lats=[], t2, k, ang;
   for(k=0;k<6;k++){var arr=[],lo=k/6*Math.PI; for(t2=0;t2<=64;t2++){ang=t2/64*2*Math.PI; arr.push([Math.sin(ang)*Math.cos(lo),Math.cos(ang),Math.sin(ang)*Math.sin(lo)]);} lons.push(arr);}
