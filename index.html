@@ -4,17 +4,18 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Pedro R. López-Gómez</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+
 <style>
+@font-face{font-family:'Source Serif 4';src:url('fonts/SourceSerif4.woff2') format('woff2');font-weight:400 600;font-style:normal;font-display:swap}
+@font-face{font-family:'Inter';src:url('fonts/Inter.woff2') format('woff2');font-weight:400 500;font-style:normal;font-display:swap}
+@font-face{font-family:'Inter';src:url('fonts/Inter-Italic.woff2') format('woff2');font-weight:400 500;font-style:italic;font-display:swap}
   :root{
     --ink:#14201C; --body:#2E3A36; --muted:#5C6661;
     --teal:#04342C; --accent:#0F6E56; --accent-h:#13855f;
     --cream:#F6F2E9; --paper:#FFFFFF; --border:#DCE5E1;
     --mint:#9FE1CB; --mint-l:#E1F5EE; --wire:#1D9E75;
     --maxw:1020px;
-    --serif:'Lora',Georgia,serif; --sans:'Inter',system-ui,sans-serif;
+    --serif:'Source Serif 4',Georgia,serif; --sans:'Inter',system-ui,sans-serif;
   }
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth; scroll-padding-top:72px;}
@@ -300,7 +301,7 @@
   var P=[];
   (function(){
   var p=3;                                   // parallels per hemisphere
-  P.push([0,0,1],[0,0,-1]);                  // poles
+  P.push([0,1,0],[0,-1,0]);                  // poles
   var counts=[];
   for(var j=1;j<=p;j++) counts.push(4*j);    // north: j=1 nearest the pole, 4j points
   for(var j=p;j>=1;j--) counts.push(4*j);    // south (mirror)
